@@ -2,7 +2,7 @@
 
 
 <p align="center">
-  A CLI for finding issues labeled with <kbd>Good First Issue</kbd> to help lower the barrier to contributing to open source projects.
+  A CLI for finding issues labeled with Good First Issue to help lower the barrier to contributing to open source projects.
   <br>
   <a href="#usage">Usage</a> •
   <a href="#projects">Projects</a> •
@@ -18,7 +18,7 @@
 
 ## Prerequisites
 
-To use <kbd>Good First Issue</kbd>, you'll need to have a few things installed:
+To use Good First Issue, you'll need to have a few things installed:
 
 - Node.js 8.0.0 or above
   - If you need to install Node.js, you can download it from the [official downloads page](https://nodejs.org/en/download/)
@@ -38,14 +38,18 @@ This module can be used as an interactive CLI.
 The suggested usage is via npx:
 
 ```bash
-npx good-first-issue [project] # temporarily install and run the module, optionally passing `project`
+npx good-first-issue [project] # temporarily install and run the module, optionally passing a `project` from the list of projects below
+npx good-first-issue [org] # temporarily install and run the module, optionally passing a GitHub organization (or user) to search as `org`
+npx good-first-issue [org]/[repo] # temporarily install and run the module, optionally passing a GitHub organization (or user) to search as `org` and GitHub repo as `repo`
 ```
 
 Alternatively, you could absolutely install good-first-issue as a global module:
 
 ```bash
 npm i -g good-first-issue # install globally
-good-first issue # call the CLI
+good-first-issue [project] # temporarily install and run the module, optionally passing a `project` from the list of projects below
+good-first-issue [org] # temporarily install and run the module, optionally passing a GitHub organization (or user) to search as `org`
+good-first-issue [org]/[repo] # temporarily install and run the module, optionally passing a GitHub organization (or user) to search as `org` and GitHub repo as `repo`
 ```
 
 ### Commands
@@ -77,7 +81,7 @@ log()
 
 #### Examples
 
-<kbd>Good First Issue</kbd> has an [examples/](./examples) directory, in which we try to maintain various examples of how <kbd>Good First Issue</kbd> can be used as a module. If you'd like to contribute to the examples, please don't hesitate to submit a PR! 🤗
+Good First Issue has an [examples/](./examples) directory, in which we try to maintain various examples of how Good First Issue can be used as a module. If you'd like to contribute to the examples, please don't hesitate to submit a PR! 🤗
 
 ## TODOs: What's coming up next
 
@@ -85,7 +89,7 @@ log()
 
 - [x] `good-first-issue node` command
 - [x] Interactive selector when `good-first-issue` is run without a sub command
-- [ ] Export <kbd>Good First Issue</kbd>s for all repos that have a command
+- [ ] Export Good First Issues for all repos that have a command
 - [ ] Add tests
 
 If you'd like to help with any of these, feel free to submit a PR or ask how you can help 🤗
