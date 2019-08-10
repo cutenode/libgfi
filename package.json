@@ -1,19 +1,16 @@
 {
   "name": "libgfi",
   "version": "1.0.0",
-  "description": "A CLI for finding good-first-issues in open source projects.",
+  "description": "A module for finding good-first-issues in open source projects.",
   "main": "index.js",
   "scripts": {
     "pretest": "standard",
     "test": "jest --collectCoverage"
   },
-  "bin": {
-    "libgfi": "./bin/libgfi.js"
-  },
   "files": [
     "bin/",
     "lib/",
-    "data",
+    "data/",
     "index.js"
   ],
   "repository": {
