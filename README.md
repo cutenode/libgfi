@@ -15,6 +15,12 @@ To use Good First Issue, you'll need to have a few things installed:
 
 ## Usage
 
+Installation:
+
+```bash
+npm install libgfi
+```
+
 An example of how libgfi can be used in a Node.js application:
 
 ```js
