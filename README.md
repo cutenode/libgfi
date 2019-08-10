@@ -24,13 +24,49 @@ npm install libgfi
 An example of how libgfi can be used in a Node.js application:
 
 ```js
-const goodFirstIssue = require('good-first-issue')
+const gfi = require('libgfi')
 
 let log = async () => {
-  let issues = await goodFirstIssue('node')
+  let issues = await gfi('microsoft') // search the 'microsoft' GitHub organization
   issues.forEach(function (issue) {
     console.log('#' + issue.pr + ': ' + issue.title)
   })
+}
+
+log()
+```
+
+Search a specific repository:
+
+```js
+const gfi = require('libgfi')
+
+gfi('golang/dep')
+  .then((issue) => {
+    console.log(issue)
+  })
+  .catch((error) => {
+    console.error(error)
+  })
+```
+
+Passing in a custom set of organizations to search:
+
+```js
+const gfi = require('libgfi')
+
+const options = {
+  projects: {
+    node: {
+      name: 'Node.js', // Human readable name
+      q: 'org:nodejs is:issue is:open label:"good first issue"', //GitHub search query
+      description: "Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine." // Human readable description
+    }
+  }
+}
+
+let log = async () => {
+  console.log(await goodFirstIssue('node', options)) // search the 'node' property
 }
 
 log()
