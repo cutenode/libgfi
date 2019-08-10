@@ -16,7 +16,7 @@ See [Adding New Projects](https://github.com/bnb/good-first-issue#adding-new-pro
 
 ### Solidifying the Module
 
-Good First Issue can be used as a module! Its original purpose was to be used as a CLI, but it can also be used as a module to surface good first issues for a specific project. If you'd like to help out with solidifying the interface and ensuring that it's a good experience for end-users to consume, we'd love your help.
+libgfi is a module intended to help you surface issues labeled "Good First Issue" (and the many variants)! Its original purpose was to be used as a CLI as a part of `good-first-issue`, but has since been split out to seperate concerns. If you'd like to help out with solidifying the interface and ensuring that it's a good experience for end-users to consume, we'd love your help.
 
 ### Enhancing Tests
 

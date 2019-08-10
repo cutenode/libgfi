@@ -1,9 +1,15 @@
 const goodFirstIssue = require('..')
 const nock = require('nock')
+const localProjects = require('./projects.json')
+
+const options = {
+  projects: localProjects
+}
 
 describe('goodFirstIssue', () => {
   let items
-  beforeEach(() => {
+
+  beforeEach(() => { // set up mock response
     items = [{
       title: 'fooTitle',
       number: 123,
@@ -17,12 +23,12 @@ describe('goodFirstIssue', () => {
     }]
 
     // "Mock" network requests to the Search API
-    nock('https://api.github.com')
-      .get(/^\/search\/issues\?/).reply(200, { items })
+    nock('https://api.github.com').get(/^\/search\/issues\?/).reply(200, { items })
   })
 
+
   it('returns the expected issues', async () => {
-    const actual = await goodFirstIssue('node')
+    const actual = await goodFirstIssue('node', options)
     expect(actual).toEqual([{
       assignee: null,
       assignees: 'fooAssignees',
@@ -38,36 +44,7 @@ describe('goodFirstIssue', () => {
 
   it('returns the expected issues from the GitHub organization', async() => {
     const actual = await goodFirstIssue('github')
-    expect(actual).toEqual([{
-      assignee: null,
-      assignees: 'fooAssignees',
-      labels: 'fooLabels',
-      locked: false,
-      pr: 123,
-      repo: 'fooRepoUrl',
-      state: 'fooState',
-      title: 'fooTitle',
-      url: 'fooHtmlUrl'
-    }])
-  })
-
-  it('returns the expected issues from the GitHub organization', async() => {
-    const actual = await goodFirstIssue('github')
-    expect(actual).toEqual([{
-      assignee: null,
-      assignees: 'fooAssignees',
-      labels: 'fooLabels',
-      locked: false,
-      pr: 123,
-      repo: 'fooRepoUrl',
-      state: 'fooState',
-      title: 'fooTitle',
-      url: 'fooHtmlUrl'
-    }])
-  })
-
-  it('returns the expected issues from the Go repo', async() => {
-    const actual = await goodFirstIssue('golang/go')
+    
     expect(actual).toEqual([{
       assignee: null,
       assignees: 'fooAssignees',
