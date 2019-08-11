@@ -10,6 +10,7 @@ const search = require('./lib/search')
 /**
  * @typedef { object } Options - special additional options that you can pass
  * @property { Projects } projects - an object of project definitions
+ * @property { string } auth - a string that contains a GitHub Personal Access Token
  */
 
 /**
@@ -26,8 +27,8 @@ module.exports = (project, options) => {
   }
 
   if (options.projects !== undefined && project in options.projects) {
-    return search(options.projects[project].q)
+    return search(options.projects[project].q, options.auth)
   } else {
-    return search(`${project.includes('/') ? 'repo' : 'org'}:${project} state:open label:"good first issue"`)
+    return search(`${project.includes('/') ? 'repo' : 'org'}:${project} state:open label:"good first issue"`, options.auth)
   }
 }
