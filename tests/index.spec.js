@@ -57,4 +57,39 @@ describe('goodFirstIssue', () => {
       url: 'fooHtmlUrl'
     }])
   })
+
+  it('authenticates request when options.auth is set', async () => {
+    const actual = await goodFirstIssue(
+      'node',
+      Object.assign(
+        {
+          auth: 'secret 123'
+        },
+        options
+      )
+    )
+
+    // "Mock" network requests with token authentication to the Search API
+    nock('https://api.github.com', {
+      reqheaders: {
+        authorization: 'token secret123'
+      }
+    })
+      .get(/^\/search\/issues\?/)
+      .reply(200, { items })
+
+    expect(actual).toEqual([
+      {
+        assignee: null,
+        assignees: 'fooAssignees',
+        labels: 'fooLabels',
+        locked: false,
+        pr: 123,
+        repo: 'fooRepoUrl',
+        state: 'fooState',
+        title: 'fooTitle',
+        url: 'fooHtmlUrl'
+      }
+    ])
+  })
 })
