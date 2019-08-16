@@ -42,8 +42,8 @@ Search a specific repository:
 const gfi = require('libgfi')
 
 gfi('golang/dep')
-  .then((issue) => {
-    console.log(issue)
+  .then((issues) => {
+    console.log(issues)
   })
   .catch((error) => {
     console.error(error)
