@@ -40,6 +40,7 @@
     "email": "hello@bnb.im"
   },
   "dependencies": {
+    "@octokit/plugin-throttling": "^2.6.0",
     "@octokit/rest": "^16.0.1"
   },
   "devDependencies": {

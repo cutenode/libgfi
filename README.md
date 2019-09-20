@@ -28,9 +28,10 @@ const gfi = require('libgfi')
 
 let log = async () => {
   let issues = await gfi('microsoft') // search the 'microsoft' GitHub organization
+  if(issues){
   issues.forEach(function (issue) {
     console.log('#' + issue.pr + ': ' + issue.title)
-  })
+  })}
 }
 
 log()
@@ -43,7 +44,7 @@ const gfi = require('libgfi')
 
 gfi('golang/dep')
   .then((issue) => {
-    console.log(issue)
+    if(issue) console.log(issue);
   })
   .catch((error) => {
     console.error(error)
@@ -66,7 +67,8 @@ const options = {
 }
 
 let log = async () => {
-  console.log(await goodFirstIssue('node', options)) // search the 'node' property
+  let res = await goodFirstIssue('node', options);
+  if(res) console.log(res); // search the 'node' property
 }
 
 log()
@@ -88,11 +90,11 @@ Good First Issue follows a relatively strict release process intended to ensure 
 
 ### Versioning
 
-| Semantic Version | Type | Reason |
-|-------------------|-------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|
-| Major (**x**.x.x) | Breaking changes and non-trivial upgrades | Ensuring that end-users can rely on Good First Issue not breaking however they're consuming it |
-| Minor (x.**x**.x) | Project additions, other feature additions | Following the SemVer standard, project additions and feature additions are backwards-compatible enhancements. We generally try to ship one addition per Minor. |
-| Patch (x.x.**x**) | Bug fixes, minor enhancements to metadata and content | Tiny, hardly visible fixes to improve UX/DX or fix the module |
+| Semantic Version  | Type                                                  | Reason                                                                                                                                                         |
+| ----------------- | ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Major (**x**.x.x) | Breaking changes and non-trivial upgrades             | Ensuring that end-users can rely on Good First Issue not breaking however they're consuming it                                                                 |
+| Minor (x.**x**.x) | Project additions, other feature additions            | Following the SemVer standard, project additions and feature additions are backwards-compatible enhancements. We generally try to ship one addition per Minor. |
+| Patch (x.x.**x**) | Bug fixes, minor enhancements to metadata and content | Tiny, hardly visible fixes to improve UX/DX or fix the module                                                                                                  |
 
 ## Labels and Milestones
 

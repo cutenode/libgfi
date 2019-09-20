@@ -6,7 +6,8 @@ const options = {
     node: {
       name: 'Node.js',
       q: 'org:nodejs is:issue is:open label:"good first issue"',
-      description: "Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine."
+      description:
+        "Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine."
     }
   }
 }
@@ -17,11 +18,26 @@ let log = async () => {
   // then if it can't be found we will search GitHub for it
   let issues = await goodFirstIssue('node', options)
 
-  // and let's do some super pretty logging using the info we get back
-  console.log('There are ' + issues.length + ' open Good First Issues in the Node.js GitHub organization.')
-  issues.forEach(function (issue) {
-    console.log('    ' + issue.url.toString().slice(19, issue.url.toString().indexOf('/issue')) + '#' + issue.pr + ': ' + issue.title)
-  })
+  if (issues) {
+    // and let's do some super pretty logging using the info we get back
+    console.log(
+      'There are ' +
+        issues.length +
+        ' open Good First Issues in the Node.js GitHub organization.'
+    )
+    issues.forEach(function (issue) {
+      console.log(
+        '    ' +
+          issue.url
+            .toString()
+            .slice(19, issue.url.toString().indexOf('/issue')) +
+          '#' +
+          issue.pr +
+          ': ' +
+          issue.title
+      )
+    })
+  }
 }
 
 // and, of course, run our code

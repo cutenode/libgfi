@@ -64,19 +64,21 @@ test('should return filtered issues if there is only one page', () => {
 
   return search({}).then(result => {
     expect(issuesAndPullRequests).toHaveBeenCalledTimes(1)
-    expect(result).toEqual([
-      {
-        title: 'fooTitle',
-        pr: 123,
-        labels: 'fooLabels',
-        state: 'fooState',
-        repo: 'fooRepoUrl',
-        url: 'fooHtmlUrl',
-        assignee: null,
-        assignees: 'fooAssignees',
-        locked: false
-      }
-    ])  
+    expect(result).toEqual(
+      [
+        {
+          title: 'fooTitle',
+          pr: 123,
+          labels: 'fooLabels',
+          state: 'fooState',
+          repo: 'fooRepoUrl',
+          url: 'fooHtmlUrl',
+          assignee: null,
+          assignees: 'fooAssignees',
+          locked: false
+        }
+      ] || undefined
+    )
   })
 })
 
@@ -154,24 +156,26 @@ test('should return filtered issues if there is more than one page', () => {
   ]
 
   //set total_count more than default per_page = 30
-  const total_count = 45;
+  const total_count = 45
 
-  issuesAndPullRequests.mockResolvedValueOnce({
-    data: {
-      total_count,
-      items: firstCallItems
-    }
-  }).mockResolvedValueOnce({
-    data: {
-      total_count,
-      items: secondCallItems
-    }
-  })
+  issuesAndPullRequests
+    .mockResolvedValueOnce({
+      data: {
+        total_count,
+        items: firstCallItems
+      }
+    })
+    .mockResolvedValueOnce({
+      data: {
+        total_count,
+        items: secondCallItems
+      }
+    })
 
   return search({}).then(result => {
-    expect(issuesAndPullRequests).toHaveBeenCalledTimes(2)    
+    expect(issuesAndPullRequests).toHaveBeenCalledTimes(2)
     const searchParams = issuesAndPullRequests.mock.calls[1][0]
-    expect(searchParams["page"]).toBeLessThanOrEqual(2)
+    expect(searchParams['page']).toBeLessThanOrEqual(2)
     expect(result).toEqual([
       {
         title: 'fooSecondTitle',
@@ -185,7 +189,6 @@ test('should return filtered issues if there is more than one page', () => {
         locked: false
       }
     ])
-    
   })
 })
 
@@ -262,25 +265,27 @@ test('should return filtered issues if there are more than allowed pages', () =>
     }
   ]
 
-  //set total_count more than allowed_records = 1000 
-  const total_count = 57000;
+  //set total_count more than allowed_records = 1000
+  const total_count = 57000
 
-  issuesAndPullRequests.mockResolvedValueOnce({
-    data: {
-      total_count,
-      items: firstCallItems
-    }
-  }).mockResolvedValueOnce({
-    data: {
-      total_count,
-      items: secondCallItems
-    }
-  })
+  issuesAndPullRequests
+    .mockResolvedValueOnce({
+      data: {
+        total_count,
+        items: firstCallItems
+      }
+    })
+    .mockResolvedValueOnce({
+      data: {
+        total_count,
+        items: secondCallItems
+      }
+    })
 
-  return search({}).then(result =>{
-    expect(issuesAndPullRequests).toHaveBeenCalledTimes(2)    
+  return search({}).then(result => {
+    expect(issuesAndPullRequests).toHaveBeenCalledTimes(2)
     const searchParams = issuesAndPullRequests.mock.calls[1][0]
-    expect(searchParams["page"]).toBeLessThanOrEqual(34)
+    expect(searchParams['page']).toBeLessThanOrEqual(34)
     expect(result).toEqual([
       {
         title: 'fooSecondTitle',
