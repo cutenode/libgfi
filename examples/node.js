@@ -11,11 +11,11 @@ const options = {
   }
 }
 
-let log = async () => {
+const log = async () => {
   // let's call a passed JSON file of projects
   // `node` will be looked for in that object first,
   // then if it can't be found we will search GitHub for it
-  let issues = await goodFirstIssue('node', options)
+  const issues = await goodFirstIssue('node', options)
 
   // and let's do some super pretty logging using the info we get back
   console.log('There are ' + issues.length + ' open Good First Issues in the Node.js GitHub organization.')
