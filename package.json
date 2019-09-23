@@ -1,6 +1,6 @@
 {
   "name": "libgfi",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A module for finding good-first-issues in open source projects.",
   "main": "index.js",
   "scripts": {
