@@ -72,6 +72,25 @@ let log = async () => {
 log()
 ```
 
+Passing in GitHub credentials (see Octokit's [authentication documentation](https://octokit.github.io/rest.js/#authentication) for more details) for authentication to exponentially increase the rate limit:
+
+```js
+const gfi = require('libgfi')
+
+const options = {
+  auth: '<replace_with_your_github_secret_personal_access_token>' // or username/password + 2fa, or app installation access token
+}
+
+let log = async () => {
+  let issues = await gfi('microsoft', options) // search the 'microsoft' GitHub organization
+  issues.forEach(function (issue) {
+    console.log('#' + issue.pr + ': ' + issue.title)
+  })
+}
+
+log()
+```
+
 ### Examples
 
 Good First Issue has an [examples/](./examples) directory, in which we try to maintain various examples of how Good First Issue can be used as a module. If you'd like to contribute to the examples, please don't hesitate to submit a PR! 🤗
