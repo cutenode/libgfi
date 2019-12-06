@@ -8,7 +8,9 @@ const options = {
       q: 'org:nodejs is:issue is:open label:"good first issue"',
       description: "Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine."
     }
-  }
+  },
+  sort: 'comments',
+  order: 'asc'
 }
 
 const log = async () => {

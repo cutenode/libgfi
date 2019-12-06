@@ -27,7 +27,7 @@ module.exports = (project, options) => {
   }
 
   if (options.projects !== undefined && project in options.projects) {
-    return search(options.projects[project].q, options.auth, options)
+    return search(options.projects[project].q, options.auth, options.sort, options.order)
   } else {
     return search(`${project.includes('/') ? 'repo' : 'org'}:${project} state:open label:"good first issue"`, options.auth)
   }
