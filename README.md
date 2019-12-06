@@ -49,8 +49,7 @@ gfi('golang/dep')
     console.error(error)
   })
 ```
-
-Passing in a custom set of organizations to search:
+Passing in a custom set of organizations to search and using sort and order:
 
 ```js
 const gfi = require('libgfi')
@@ -62,7 +61,9 @@ const options = {
       q: 'org:nodejs is:issue is:open label:"good first issue"', //GitHub search query
       description: "Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine." // Human readable description
     }
-  }
+  },
+  sort: 'comments',
+  order: 'asc'
 }
 
 let log = async () => {
@@ -71,6 +72,7 @@ let log = async () => {
 
 log()
 ```
+The valid options available in sort and order can be found at [Github's documentation](https://developer.github.com/v3/search/#search-issues-and-pull-requests). Passing any of the allowed parameters as strings should work. 
 
 Passing in GitHub credentials (see Octokit's [authentication documentation](https://octokit.github.io/rest.js/#authentication) for more details) for authentication to exponentially increase the rate limit:
 
