@@ -1,5 +1,7 @@
 # libgfi
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/cutenode/libgfi.svg)](https://greenkeeper.io/)
+
 A module to surface GitHub issues labeled "Good First Issue" (and similar variants) for any GitHub organization, repo, or pre-defined project.
 
 ## Prerequisites
