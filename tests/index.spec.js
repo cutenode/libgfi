@@ -9,6 +9,15 @@ const options = {
 describe('goodFirstIssue', () => {
   let items
 
+  beforeAll(() => {
+    // this Date.now() is this date: 2020-06-05T18:49:18.644Z
+    jest.spyOn(Date, 'now').mockImplementation(() => 1591382958644)
+  })
+
+  afterAll(() => {
+    jest.clearAllMocks()
+  })
+
   beforeEach(() => { // set up mock response
     items = [{
       title: 'fooTitle',
@@ -19,7 +28,8 @@ describe('goodFirstIssue', () => {
       html_url: 'fooHtmlUrl',
       assignee: null,
       assignees: 'fooAssignees',
-      locked: false
+      locked: false,
+      created_at: '2020-06-01T11:00:00Z'
     }]
 
     // "Mock" network requests to the Search API
@@ -39,12 +49,13 @@ describe('goodFirstIssue', () => {
       state: 'fooState',
       title: 'fooTitle',
       url: 'fooHtmlUrl',
+      daysOpened: 4
     }])
   })
 
   it('returns the expected issues from the GitHub organization', async() => {
     const actual = await goodFirstIssue('github')
-    
+
     expect(actual).toEqual([{
       assignee: null,
       assignees: 'fooAssignees',
@@ -54,7 +65,8 @@ describe('goodFirstIssue', () => {
       repo: 'fooRepoUrl',
       state: 'fooState',
       title: 'fooTitle',
-      url: 'fooHtmlUrl'
+      url: 'fooHtmlUrl',
+      daysOpened: 4
     }])
   })
 })
