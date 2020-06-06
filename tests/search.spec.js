@@ -1,6 +1,15 @@
 let issuesAndPullRequests
 let search
 
+beforeAll(() => {
+  // this Date.now() is this date: 2020-06-05T18:49:18.644Z
+  jest.spyOn(Date, 'now').mockImplementation(() => 1591382958644)
+})
+
+afterAll(() => {
+  jest.clearAllMocks()
+})
+
 beforeEach(() => {
   jest.resetModules()
   jest.restoreAllMocks()
@@ -27,7 +36,8 @@ test('should return filtered issues if there is only one page', () => {
       html_url: 'fooHtmlUrl',
       assignee: null,
       assignees: 'fooAssignees',
-      locked: false
+      locked: false,
+      created_at: '2020-06-01T11:00:00Z'
     },
     {
       title: 'barTitle',
@@ -38,7 +48,8 @@ test('should return filtered issues if there is only one page', () => {
       html_url: 'barHtmlUrl',
       assignee: 'barAssignee',
       assignees: 'barAssignees',
-      locked: false
+      locked: false,
+      created_at: '2020-06-01T11:00:00Z'
     },
     {
       title: 'bazTitle',
@@ -49,7 +60,8 @@ test('should return filtered issues if there is only one page', () => {
       html_url: 'bazHtmlUrl',
       assignee: null,
       assignees: 'bazAssignees',
-      locked: true
+      locked: true,
+      created_at: '2020-06-01T11:00:00Z'
     }
   ]
 
@@ -74,9 +86,10 @@ test('should return filtered issues if there is only one page', () => {
         url: 'fooHtmlUrl',
         assignee: null,
         assignees: 'fooAssignees',
-        locked: false
+        locked: false,
+        daysOpened: 4
       }
-    ])  
+    ])
   })
 })
 
@@ -91,7 +104,8 @@ test('should return filtered issues if there is more than one page', () => {
       html_url: 'fooHtmlUrl',
       assignee: null,
       assignees: 'fooAssignees',
-      locked: false
+      locked: false,
+      created_at: '2020-06-01T11:00:00Z'
     },
     {
       title: 'barFirstTitle',
@@ -102,7 +116,8 @@ test('should return filtered issues if there is more than one page', () => {
       html_url: 'barHtmlUrl',
       assignee: 'barAssignee',
       assignees: 'barAssignees',
-      locked: false
+      locked: false,
+      created_at: '2020-06-01T11:00:00Z'
     },
     {
       title: 'bazFirstTitle',
@@ -113,7 +128,8 @@ test('should return filtered issues if there is more than one page', () => {
       html_url: 'bazHtmlUrl',
       assignee: null,
       assignees: 'bazAssignees',
-      locked: true
+      locked: true,
+      created_at: '2020-06-01T11:00:00Z'
     }
   ]
 
@@ -127,7 +143,8 @@ test('should return filtered issues if there is more than one page', () => {
       html_url: 'fooHtmlUrl',
       assignee: null,
       assignees: 'fooAssignees',
-      locked: false
+      locked: false,
+      created_at: '2020-06-01T11:00:00Z'
     },
     {
       title: 'barSecondTitle',
@@ -138,7 +155,8 @@ test('should return filtered issues if there is more than one page', () => {
       html_url: 'barHtmlUrl',
       assignee: 'barAssignee',
       assignees: 'barAssignees',
-      locked: false
+      locked: false,
+      created_at: '2020-06-01T11:00:00Z'
     },
     {
       title: 'bazSecondTitle',
@@ -149,7 +167,8 @@ test('should return filtered issues if there is more than one page', () => {
       html_url: 'bazHtmlUrl',
       assignee: null,
       assignees: 'bazAssignees',
-      locked: true
+      locked: true,
+      created_at: '2020-06-01T11:00:00Z'
     }
   ]
 
@@ -169,7 +188,7 @@ test('should return filtered issues if there is more than one page', () => {
   })
 
   return search({}).then(result => {
-    expect(issuesAndPullRequests).toHaveBeenCalledTimes(2)    
+    expect(issuesAndPullRequests).toHaveBeenCalledTimes(2)
     const searchParams = issuesAndPullRequests.mock.calls[1][0]
     expect(searchParams["page"]).toBeLessThanOrEqual(2)
     expect(result).toEqual([
@@ -182,10 +201,11 @@ test('should return filtered issues if there is more than one page', () => {
         url: 'fooHtmlUrl',
         assignee: null,
         assignees: 'fooAssignees',
-        locked: false
+        locked: false,
+        daysOpened: 4
       }
     ])
-    
+
   })
 })
 
@@ -200,7 +220,8 @@ test('should return filtered issues if there are more than allowed pages', () =>
       html_url: 'fooHtmlUrl',
       assignee: null,
       assignees: 'fooAssignees',
-      locked: false
+      locked: false,
+      created_at: '2020-06-01T11:00:00Z'
     },
     {
       title: 'barFirstTitle',
@@ -211,7 +232,8 @@ test('should return filtered issues if there are more than allowed pages', () =>
       html_url: 'barHtmlUrl',
       assignee: 'barAssignee',
       assignees: 'barAssignees',
-      locked: false
+      locked: false,
+      created_at: '2020-06-01T11:00:00Z'
     },
     {
       title: 'bazFirstTitle',
@@ -222,7 +244,8 @@ test('should return filtered issues if there are more than allowed pages', () =>
       html_url: 'bazHtmlUrl',
       assignee: null,
       assignees: 'bazAssignees',
-      locked: true
+      locked: true,
+      created_at: '2020-06-01T11:00:00Z'
     }
   ]
 
@@ -236,7 +259,8 @@ test('should return filtered issues if there are more than allowed pages', () =>
       html_url: 'fooHtmlUrl',
       assignee: null,
       assignees: 'fooAssignees',
-      locked: false
+      locked: false,
+      created_at: '2020-06-01T11:00:00Z'
     },
     {
       title: 'barSecondTitle',
@@ -247,7 +271,8 @@ test('should return filtered issues if there are more than allowed pages', () =>
       html_url: 'barHtmlUrl',
       assignee: 'barAssignee',
       assignees: 'barAssignees',
-      locked: false
+      locked: false,
+      created_at: '2020-06-01T11:00:00Z'
     },
     {
       title: 'bazSecondTitle',
@@ -258,11 +283,12 @@ test('should return filtered issues if there are more than allowed pages', () =>
       html_url: 'bazHtmlUrl',
       assignee: null,
       assignees: 'bazAssignees',
-      locked: true
+      locked: true,
+      created_at: '2020-06-01T11:00:00Z'
     }
   ]
 
-  //set total_count more than allowed_records = 1000 
+  //set total_count more than allowed_records = 1000
   const total_count = 57000;
 
   issuesAndPullRequests.mockResolvedValueOnce({
@@ -278,7 +304,7 @@ test('should return filtered issues if there are more than allowed pages', () =>
   })
 
   return search({}).then(result =>{
-    expect(issuesAndPullRequests).toHaveBeenCalledTimes(2)    
+    expect(issuesAndPullRequests).toHaveBeenCalledTimes(2)
     const searchParams = issuesAndPullRequests.mock.calls[1][0]
     expect(searchParams["page"]).toBeLessThanOrEqual(34)
     expect(result).toEqual([
@@ -291,7 +317,8 @@ test('should return filtered issues if there are more than allowed pages', () =>
         url: 'fooHtmlUrl',
         assignee: null,
         assignees: 'fooAssignees',
-        locked: false
+        locked: false,
+        daysOpened: 4
       }
     ])
   })
