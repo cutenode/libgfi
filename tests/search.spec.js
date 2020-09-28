@@ -6,13 +6,16 @@ beforeEach(() => {
   jest.restoreAllMocks()
   jest.resetAllMocks()
   issuesAndPullRequests = jest.fn()
-  jest.doMock('@octokit/rest', () => () => {
-    return {
-      search: {
-        issuesAndPullRequests
+  jest.doMock("@octokit/rest", () => ({
+    // cannot use arrow function here because we can't call new on arrow function
+    Octokit: function () {
+      return {
+        search: {
+          issuesAndPullRequests
+        }
       }
     }
-  })
+  }))
   search = require('../lib/search')
 })
 
